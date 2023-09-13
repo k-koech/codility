@@ -13,20 +13,22 @@
 # string S is made only of digits (0−9).
 
 
-
 def solution(S):
     max_sum = 0
-    n = len(S)
-
-    for i in range(n - 2):
-        for j in range(i + 2, n):
+    N = len(S)
+    
+    for i in range(N - 1):
+        for j in range(i + 2, N - 1):
             fragment1 = int(S[i:i+2])
             fragment2 = int(S[j:j+2])
-
-            if i + 2 <= j and fragment1 + fragment2 > max_sum:
-                max_sum = fragment1 + fragment2
-
+            
+            # Check if the two fragments overlap
+            if i + 2 <= j:
+                current_sum = fragment1 + fragment2
+                max_sum = max(max_sum, current_sum)
+    
     return max_sum
+    
 
 # Test cases
 print(solution("43798"))  # Should return 141
